@@ -19,12 +19,14 @@ Add images to know_faces with names as [name].png/jpg/jpeg
 Or capture new user by pressing 'n'
 Exit the program after attendance is logged by pressing 'q'
 
+---
+
 ## Dependencies
 
 Install the required packages using:
 
 ```bash
 pip install opencv-python pandas deepface
+```
 
---
 
