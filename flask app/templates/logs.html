@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Attendance Logs</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body>
+  <h2>Attendance Log</h2>
+  <table border="1">
+    <tr><th>Name</th><th>Time</th></tr>
+    {% for name, time in entries %}
+      <tr><td>{{ name }}</td><td>{{ time }}</td></tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="/">← Back to Home</a>
+</body>
+</html>

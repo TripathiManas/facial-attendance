@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Facial Attendance System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Facial Attendance System</h1>
+
+        <div class="video-preview">
+            <img src="{{ url_for('preview_feed') }}" alt="Webcam feed" width="640" height="480">
+        </div>
+
+        <form action="{{ url_for('mark_attendance') }}" method="POST">
+            <button type="submit" class="btn">Mark Attendance</button>
+        </form>
+
+        <form action="{{ url_for('add_user_route') }}" method="POST">
+            <input type="text" name="name" placeholder="Enter name" required>
+            <button type="submit" class="btn">Add User</button>
+        </form>
+
+        <button onclick="shutdownApp()" class="btn stop">Stop Server</button>
+
+        <a href="/logs" class="link">📄 View Attendance Logs</a>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "toast show " + (isSuccess ? "success" : "error");
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('msg')) {
+            showToast(decodeURIComponent(urlParams.get('msg')), urlParams.get('type') === 'success');
+        }
+
+        function shutdownApp() {
+            if (confirm("Are you sure you want to stop the server?")) {
+                // First redirect to goodbye page — it will shut server there
+                window.location.href = "/goodbye";
+            }
+        }
+    </script>
+</body>
+
+</html>
